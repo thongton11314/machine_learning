@@ -1,6 +1,6 @@
 # Sentiment Analysis with RoBERTa
 
-This project demonstrates how to perform sentiment analysis using the RoBERTa model from the Hugging Face Transformers library. The code provided in this repository includes steps to load a pre-trained RoBERTa model, tokenize input text, and predict the sentiment of the given text.
+This project demonstrates how to perform sentiment analysis using the fine-tuned RoBERTa model from the Hugging Face Transformers library. The code provided in this repository includes steps to load a pre-trained + fine-tuned RoBERTa model, tokenize input text, and predict the sentiment of the given text.
 
 ## Overview
 
