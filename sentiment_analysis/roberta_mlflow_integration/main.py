@@ -2,6 +2,8 @@ import mlflow
 import os
 import logging
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
+import numpy as np
+import json
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -49,8 +51,9 @@ class HuggingFaceModelWrapper(mlflow.pyfunc.PythonModel):
         pipe = pipeline("text-classification", model=self.model, tokenizer=self.tokenizer)
         if not model_input:
             raise ValueError('Input is empty')
+        print(f"*Your input*: {model_input}")
         logging.info(f'Input: {model_input}')
-        return pipe(model_input)[0]
+        return json.dumps(pipe(str(model_input["input_string"]))[0])
 
 # Save the model as an MLflow model
 try:
@@ -73,7 +76,7 @@ except Exception as e:
 
 # Test prediction
 try:
-    output = loaded_model.predict("I love you")
+    output = loaded_model.predict({'input_string': np.array('I love you!', dtype='<U11')})
     print(output)
 except Exception as e:
     logging.error(f"Error in prediction: {e}")
